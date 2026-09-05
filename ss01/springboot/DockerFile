@@ -1,0 +1,19 @@
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS builder
+WORKDIR /app
+
+# sao chep file cau hinh va tai dependency ve
+COPY pom.xml .
+RUN mvn dependency:go-office -B
+
+# sao chep ma nguon
+COPY src ./src
+RUN mvn clean package - DskipTests
+
+
+# chay ung dung
+FROM eclipse-eclipse-temurin-21-jre-alpine
+WORKDIR /app
+
+EXPOSE 8080
+
+ENTRYPOINT [ "java", "-jar", "app.jar" ]

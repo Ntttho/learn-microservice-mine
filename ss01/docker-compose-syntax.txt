@@ -1,0 +1,18 @@
+version: phiên bán cú pháp docker compose
+service: định nghĩa các thành phần container trong hệ thống. Một service tương ứng với 1 máy chủ ảo độc lập
+
+
+
+port: cổng kết nối máy tính vào bên trong container. "8080:8080"
+environment: các biến môi trường vào container
+volumes: khu vực lưu trữ dữ liệu bền vững trên ổ cứng của máy tính, giúp dữ liệu không bị bộc hơi khi container bị tắt hoặc xóa đi.
+    image: chỉ định phiên bản phần mềm, tải từ kho lưu trữ docker hub về để Chạy
+    container_name: dành cho container nhỏ để docker đặt tên cố định cho container
+    command: câu lệnh sẽ được thực thi khi container khởi động lên, ghi đè hoặc bổ sung thiết lập cho ứng dụng bên trong
+    healthcheck: bộ phân tự động kiểm tra định kỳ xem ứng dụng bên trong container có đang hoạt động khỏe mạnh hay không
+    helthcheck:
+        - test: kiểm tra tự động 
+            (cmd - báo cho doker biết chúng ta đang chạy một lệnh trực tiếp từ command)
+            (redis-cli || kafka... - công cụ/ chương trình cài được cài sẳn bên trong image đó để giao tiếp với dịch vụ)
+            (-a, default..., ping - tham số truyền vào cho câu lệnh đó)
+        => mục đích chính là docker chạy định kỳ các câu lệnh lên cmd xem phản hồi của các dịch vụ có hoạt động bình thường với các tham số truyền vào không

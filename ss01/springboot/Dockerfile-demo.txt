@@ -1,0 +1,28 @@
+# ==========================================
+# GIAI ĐOẠN 1: Build file JAR ứng dụng
+# ==========================================
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS builder
+WORKDIR /app
+
+# Sao chép file cấu hình pom.xml và tải trước dependencies (giúp tận dụng cache)
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Sao chép toàn bộ mã nguồn vào và tiến hành đóng gói (bỏ qua bước test cho nhanh)
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# ==========================================
+# GIAI ĐOẠN 2: Chạy ứng dụng trên môi trường nhẹ
+# ==========================================
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+
+# Sao chép file JAR đã build từ giai đoạn 1 sang giai đoạn này
+COPY --from=builder /app/target/*.jar app.jar
+
+# Mở cổng mặc định của Spring Boot (thường là 8080)
+EXPOSE 8080
+
+# Lệnh khởi động ứng dụng
+ENTRYPOINT ["java", "-jar", "app.jar"]

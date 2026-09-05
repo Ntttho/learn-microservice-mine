@@ -1,0 +1,71 @@
+Dưới đây là tổng hợp các câu lệnh Docker phổ biến và thiết yếu nhất, được phân chia theo từng nhóm chức năng cụ thể:
+
+Quản lý Docker Container
+
+docker run [options] [image]: Tạo và khởi chạy một container mới từ image.
+
+docker run -d -p 8080:80 --name my_web nginx: Chạy ngầm (-d), map cổng 8080 trên máy thật vào cổng 80 của container (-p), và đặt tên container (--name).
+
+docker run -it ubuntu bash: Chạy container và mở terminal tương tác (-it).
+
+docker ps: Xem danh sách các container đang chạy.
+
+docker ps -a: Xem tất cả container (kể cả những container đã dừng).
+
+docker start [container_id/name]: Khởi động một container đã dừng.
+
+docker stop [container_id/name]: Dừng một container đang chạy.
+
+docker restart [container_id/name]: Khởi động lại container.
+
+docker rm [container_id/name]: Xóa một container đã dừng.
+
+docker rm -f [container_id/name]: Ép buộc dừng và xóa container đang chạy.
+
+docker logs -f [container_id/name]: Xem log thời gian thực (-f) của container.
+
+docker exec -it [container_id/name] bash: Mở phiên làm việc bash/sh trực tiếp bên trong container đang chạy.
+
+Quản lý Docker Image
+
+docker images (hoặc docker image ls): Liệt kê danh sách các image trên máy.
+
+docker pull [image_name]: Tải image từ Docker Hub về máy (ví dụ: docker pull node:18-alpine).
+
+docker build -t [image_name]:[tag] .: Đóng gói image từ Dockerfile trong thư mục hiện tại.
+
+docker rmi [image_id/name]: Xóa một Docker image khỏi máy.
+
+docker push [username/repo:tag]: Đẩy image lên Docker Hub hoặc registry riêng.
+
+Quản lý Dọn dẹp & Tài nguyên
+
+docker system prune: Dọn dẹp tất cả container đã dừng, network không dùng đến và image không gắn nhãn (dangling images).
+
+docker system prune -a --volumes: Dọn dẹp triệt để (xóa cả image không dùng và volume không gắn kết).
+
+docker stats: Hiển thị mức sử dụng CPU, RAM, Network I/O của các container theo thời gian thực.
+
+Quản lý Docker Volume & Network
+
+docker volume ls: Xem danh sách các volume lưu trữ.
+
+docker volume create [volume_name]: Tạo một volume mới để lưu dữ liệu bền vững.
+
+docker volume rm [volume_name]: Xóa volume.
+
+docker network ls: Liệt kê các mạng Docker đang hoạt động.
+
+docker network create [network_name]: Tạo một bridge network mới để các container giao tiếp nội bộ.
+
+Docker Compose (Quản lý nhiều container)
+
+docker compose up -d: Khởi chạy toàn bộ dịch vụ được khai báo trong docker-compose.yml ở chế độ chạy ngầm.
+
+docker compose down: Dừng và gỡ bỏ toàn bộ container, network được tạo bởi file Compose.
+
+docker compose down -v: Dừng, gỡ bỏ container, network kèm theo việc xóa luôn các volume liên quan.
+
+docker compose ps: Xem trạng thái các dịch vụ trong compose file.
+
+docker compose logs -f [service_name]: Theo dõi log của một dịch vụ cụ thể.
