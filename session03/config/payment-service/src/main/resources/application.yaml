@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: payment-service
+  profiles:
+    active: dev
+  config:
+    # import cấu hình config server
+    import: "optional:configserver:http://localhost:8888"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

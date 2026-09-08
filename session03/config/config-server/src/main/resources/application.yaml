@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          # đọc file cấu hình từ local
+          search-locations: file:/D:/microservice-rikkei/session03/config/config-repo
+
+
+server:
+  port: 8888

@@ -1,0 +1,3 @@
+app:
+  message: "Xin chào từ config server gửi tới payment service"
+  discount: 15
