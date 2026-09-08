@@ -9,7 +9,18 @@ spring:
         native:
           # đọc file cấu hình từ local
           search-locations: file:/D:/microservice-rikkei/session03/config/config-repo
+        git:
+          uri: https://github.com/Ntttho/learn-microservice-mine/tree/main/session03/config/config-repo
+          default-label: main
+          clone-on-start: true
 
 
 server:
   port: 8888
+#server:
+#  port: 8761
+#
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
