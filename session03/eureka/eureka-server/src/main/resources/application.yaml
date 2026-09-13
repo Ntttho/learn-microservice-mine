@@ -3,22 +3,24 @@ spring:
     name: eureka-server
   cloud:
     config:
-      allow-override:
+      allow-override: true
       server:
         git:
-          uri: https://github.com/Ntttho/learn-microservice-mine/tree/main/session03/config/config-repo
+          uri: https://github.com/Ntttho/learn-microservice-mine
           default-label: main
           clone-on-start: true
-#  cloud:
-#    config:
-#      server:
-#        native:
-#          search-locations:
+          search-paths: session03/config/config-repo
 
 server:
   port: 8761
 
 eureka:
+  instance:
+    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false

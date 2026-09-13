@@ -2,6 +2,7 @@ spring:
   application:
     name: product-service
   config:
+    # import cấu hình nhờ vào config server
     import: optional:configserver:http://localhost:8888
 
 server:

@@ -1,0 +1,4 @@
+app:
+  variable: hello anh em testing thanh cong
+server:
+  port: 8085

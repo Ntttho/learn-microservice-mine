@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        routes:
+          - id: category-route
+            uri: lb://category-service
+            predicates:
+              - Path=/api/greeting/**
+          - id: product-route
+            uri: lb://product-service
+            predicates:
+              - Path=/api/product
+          - id: order-route
+            uri: lb://order-service
+            predicates:
+              - Path=/api/order
+server:
+  port: 9999
