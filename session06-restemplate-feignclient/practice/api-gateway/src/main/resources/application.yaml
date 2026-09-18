@@ -1,3 +1,6 @@
+server:
+  port: 9999
+
 spring:
   application:
     name: api-gateway
@@ -8,11 +11,8 @@ spring:
       server:
         webflux:
           routes:
-            -  id: order-route
-               uri: lb:/order-service
+            -  id: service-route
+               uri: lb:/service-name
                predicates:
-                 - Path=/api/order**, /api/order
-            -  id: lb:/prodcut-route
-               uri: lb:/product-service
-               predicates:
-                - Path=/api/product, /api/product/**
+                 - Path=/api/order
+                 - Path=/api/order/**

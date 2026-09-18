@@ -5,18 +5,18 @@ import org.springframework.cloud.loadbalancer.core.ReactorServiceInstanceLoadBal
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-public class LoadBalancingConfiguration {
+@Configuration
+public class LBConfig {
     @Bean
-    public ReactorServiceInstanceLoadBalancer randomLoadBalancer(
+    public ReactorServiceInstanceLoadBalancer reactorServiceInstanceLoadBalancer (
             Environment environment, LoadBalancerClientFactory loadBalancerClientFactory
     ){
-        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
-        assert name != null;
-        return
-                new RandomLoadBalancer(
-                        loadBalancerClientFactory.getProvider(name, ServiceInstanceListSupplier.class), name
-                );
+        String name = environment.getProperty(loadBalancerClientFactory.PROPERTY_NAME);
+        return new RandomLoadBalancer(
+                loadBalancerClientFactory.getProvider(name, ServiceInstanceListSupplier.class)
+                ,name);
     }
 }
