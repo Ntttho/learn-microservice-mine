@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: order-service
+  # 1. Cấu hình Spring AOP
+  aop:
+    auto: true                  # Tự động cấu hình AOP (mặc định true)
+    proxy-target-class: true    # Dùng CGLIB proxy cho class
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      product-service:
+        sliding-window-size: 10
+        sliding-window-type: count_based
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10000ms
+        permitted-number-of-calls-in-half-open-state: 3
+
+
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "health, circuitbreakers, circuitbreakerevents"
+
+server:
+  port: 8082
+
+# 4. Mở endpoint Actuator để theo dõi trạng thái Circuit Breaker
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,circuitbreakers,circuitbreakerevents"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
