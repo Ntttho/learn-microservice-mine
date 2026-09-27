@@ -270,3 +270,4 @@ public class OrderController {
    - **Nguyên nhân:** Viết sai chữ ký hàm Fallback (sai tham số, sai kiểu trả về, hoặc để `private`).
 3. **Lỗi `Could not find org.springframework.boot:spring-boot-starter-aop`:**
    - **Nguyên nhân:** Khai báo thừa starter AOP không tương thích phiên bản; trong khi `spring-cloud-starter-circuitbreaker-resilience4j` đã tích hợp sẵn.
+  
