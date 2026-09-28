@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/product_database2?createDatabaseIfNotExist=true
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: default_pass_of_your_choice
+      connect-timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+
+server:
+  port: 8080
