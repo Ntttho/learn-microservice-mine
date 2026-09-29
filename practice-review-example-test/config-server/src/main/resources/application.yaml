@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native # hay quên khi cấu hình config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:/D:/microservice-rikkei/practice-review-example-test/config-repo
+
+server:
+  port: 8888

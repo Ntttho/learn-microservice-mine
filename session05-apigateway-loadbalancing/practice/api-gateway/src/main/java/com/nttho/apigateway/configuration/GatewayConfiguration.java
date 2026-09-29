@@ -13,6 +13,7 @@ public class GatewayConfiguration {
                 .route(
                     "product-route", r -> r.path("/api/product-service").uri("lb://product-service")
                 )
+
                 .build()
                 ;
     }

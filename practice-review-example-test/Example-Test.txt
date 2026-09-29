@@ -1,0 +1,46 @@
+============== Kiểm tra thử ===================
+Đề bài:
+Việc thực hiện module order product, and notification for user
+
+
+===== data structer - cấu trúc bang =======
+product: 
+productId, name, price, quantity (stock cx dc)
+
+order: 
+orderId, username (người dung - cải thiện khó hơn bang bảng user), 
+orderdetails (bang riêng - những sản phẩm của đơn hàng), createat, 
+status (trạng thái đơn hang) - (cancelled, pending, completed)
+
+orderdetail:
+orderId, productid, quantity, price
+
+===== module Notification ========
+- Thực hiện kafka lắng Nghe sự kiện order status 
+- Thực hiện thông báo cho người dung để theo dõi đơn hang của mình (thông báo thông qua username hoặc thông tin user)
+
+===== Yêu cầu đề bài =====
+- Cấu hình config-server
+- Cấu hình eureka-server -> nhận quản lý các instance
+- Cấu hình api-gateway là đại diện trung gian giữa client và các service
+- áp dung kafka quản lý và điều phối sự kiên (event)/ tin nhắn (message) thưc hiện module notification
+- áp dung aop quản lý circuir breaker thông qua actuator/health kháng lỗi cho hệ thống khi có sự cố bất ổn
+- thực hiện quản lý dữ lieu hiệu quả, đồng bộ dữ lieu cho hệ thống phân tán, saga pattern (sử dung orchestrator design)
+- kết hợp dữ lieu đưa vào ram lưu trữ, quản lý bang redis cache -> tối ưu tốc độ xữ lý dữ lieu đọc ít ghi nhiều
+
+
+================ Tóm tắt đề bài ======================
+- product-service: không cần kafka, không feign client (nó chỉ mục đích lưu danh sách sản phầm), cần sử dung redis lưu dữ lieu lên ram
+- order-service: feign client -> gọi product, producer kafka gửi event cho notification
+- notification-service: cần consumer kafka -> thực hiện hóa nhận event thông báo người dung đã mua sản phẩm thành công...
+
+
+
+
+
+
+
+
+
+
+

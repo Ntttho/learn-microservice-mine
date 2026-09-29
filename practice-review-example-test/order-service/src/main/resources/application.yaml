@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/order_database_test1?createDatabaseIfNotExist=true
+    password: 1234
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+# cấu hình kafka cách 2
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    producer:
+#      # Key luôn dùng StringSerializer cho producer
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      # Value dùng JsonSerializer để tự convert DTO Object sang JSON
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      acks: all               # Đảm bảo ghi an toàn vào mọi replica
+#      retries: 5              # Tự động retry khi mạng chập chờn
+#      properties:
+#        enable.idempotence: true # Tránh gửi trùng lặp message

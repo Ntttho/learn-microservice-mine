@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false # tự động tạo route từ eureka
+          # đăng ký không cần Bean (comment lại gatewayconfig v mở cái này ra)
+#          routes:
+#            - id: "product-route"
+#              uri: "lb://product-service"
+#              predicates:
+#                - Path=/api/products, /api/products/**
+#            - id: "order-service"
+#              uri: "lb://order-service"
+#              predicates:
+#                - Path=/api/orders, /api/orders/**
+                #...
+
